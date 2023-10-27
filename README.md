@@ -1,4 +1,4 @@
 React + Vite
-![Texto alternativo](https://es.vitejs.dev/logo.svg)
+!(https://es.vitejs.dev/logo.svg)
 
 Deploy: https://react-vite-tailwind-todo.netlify.app
