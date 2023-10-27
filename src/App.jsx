@@ -1,41 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import TodoComputed from "./components/TodoComputed";
 import TodoCreate from "./components/TodoCreate";
 import TodoFilter from "./components/TodoFilter";
 import TodoList from "./components/TodoList";
 
-const initialStateTodos = [
-  {
-    id: 1,
-    title: "Go to the gym",
-    completed: false
-  },
-  {
-    id: 2,
-    title: "Complete course of JavaScript",
-    completed: true
-  },
-  {
-    id: 3,
-    title: "10 minutes meditation",
-    completed: false
-  },
-  {
-    id: 4,
-    title: "Complete Todo App on Frontend Mentors",
-    completed: false
-  },
-  {
-    id: 5,
-    title: "Go to school",
-    completed: true
-  }
-];
+//inicializar los todos para guardar
+const initialStateTodos = JSON.parse(localStorage.getItem("todos")) || [];
 
 const App = () =>{
 
   const [todos, setTodos] = useState(initialStateTodos);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  },[todos]);
 
   const createTodo = (title) => {
     const newTodo = {
@@ -79,11 +58,12 @@ const App = () =>{
   }
 
   return (
-    <div className="bg-gray-300 min-h-screen bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')]">
+    //responsive con breakpoint en tailwind
+    <div className="bg-gray-300 min-h-screen bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')] md:bg-[url('./assets/images/bg-desktop-light.jpg')] md:dark:bg-[url('./assets/images/bg-desktop-dark.jpg')]">
       
       <Header />
 
-      <main className="container mt-8 mx-auto px-4">
+      <main className="container mt-8 mx-auto px-4 md:max-w-xl">
 
         <TodoCreate createTodo={createTodo}/> 
 
